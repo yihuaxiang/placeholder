@@ -1,4 +1,4 @@
-var port = Number(process.env.PORT || 8080)
+var port = Number(process.env.PORT || 8084)
 
 var global_count = 0
 
@@ -14,7 +14,7 @@ app.get('/', function(req, res) {
 })
 
 app.get('/*', function(req, res) {
-  let args = parseurl(req).pathname.replace('/', '').split('+')
+  let args = parseurl(req).pathname.replace('/placeholder/', '').split('+')
   let size = args[0].split('x')
   let width = size[0]
   let height = size[1]
