@@ -1,7 +1,10 @@
 var port = Number(process.env.PORT || 8084)
 
+
 var global_count = 0
 
+var fs = require('fs')
+var path = require('path')
 var parseurl = require('parseurl')
 var logger = require('morgan')
 var express = require('express')
@@ -9,11 +12,14 @@ var app = express()
 
 app.use(logger())
 
-app.get('/', function(req, res) {
-  res.send('API Counting: ' + global_count)
+app.get('/placeholder', function(req, res) {
+  const text = fs.readFileSync(path.join(__dirname, './README.md'));
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end(text);
 })
 
 app.get('/*', function(req, res) {
+  console.log('pathname is ', parseurl(req).pathname);
   let args = parseurl(req).pathname.replace('/placeholder/', '').split('+')
   let size = args[0].split('x')
   let width = size[0]
@@ -30,7 +36,8 @@ app.get('/*', function(req, res) {
     }
   }
   res.writeHead(200, {'Content-Type': 'image/svg+xml'})
-  res.end(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none"><rect width="${width}" height="${height}" style="${rectStyle}" fill="#eee"/>${elements}<text text-anchor="middle" x="${width/2}" y="${height/2}" style="fill:#aaa;font-weight:bold;font-size:${font_size}px;font-family:Arial,Helvetica,sans-serif;dominant-baseline:central">${width}x${height}</text></svg>`)
+  res.end(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none"><rect width="${width}" height="${height}" style="${rectStyle}" fill="#eee"/>${elements}<text text-anchor="middle" x="${width/2}" y="${height/2}" style="fill:#aaa;font-weight:bold;font-size:${font_size}px;font-family:Arial,Helvetica,sans-serif;dominant-baseline:central">${width}x${height}</text>
+  </svg>`)
   global_count ++
 })
 
