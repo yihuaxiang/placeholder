@@ -70,6 +70,6 @@ https://z.wiki/placeholder/512x128+cross+border?text=1234&color=red&bgColor=rgba
 
 ![](https://z.wiki/placeholder/512x128+cross+border?text=1234&color=red&bgColor=rgba(0,255,0,0.3)&borderColor=blue&crossColor=orange)
 
-![](https://z.wiki/placeholder/512x128+cross+border?text=z.wiki&color=rgb(68%20255%200)&bgColor=rgb(26%20124%20181)&borderColor=rgb(119%2015%20194)&crossColor=rgb(184%20194%2015))
+![](https://z.wiki/placeholder/512x128+cross+border?text=z.wiki&color=rgb(68%20255%200\)&bgColor=rgb(26%20124%20181)&borderColor=rgb(119%2015%20194\)&crossColor=rgb(184%20194%2015\))
 
 
