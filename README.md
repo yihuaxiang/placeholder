@@ -1,36 +1,48 @@
-Placeholder
-==========================
+# 占位符服务
 
-It won't actually generate any image content such as JPG or PNG; only text SVG will be return to the client.
+一个简单的占位符服务
 
-**Usage:**
+### 使用方法
 
-    $ node server.js
-    Listening on port 8080
+1. 普通占位符图片
 
-**Example:**
+```html
+<img src="https://z.wiki/placeholder/512x128" />
+```
 
-```<img src="https://[YOUR_DOMAIN]/512x128" />```
+![](https://z.wiki/placeholder/512x128)
 
-![](https://misaka.imfast.io/512x128.svg)
 
-```<img src="https://[YOUR_DOMAIN]/32x32" />```
 
-![](https://misaka.imfast.io/32x32.svg)
+```html
+<img src="https://z.wiki/placeholder/512x256" />
+```
 
-```<img src="https://[YOUR_DOMAIN]/64x128" />```
+![](https://z.wiki/placeholder/512x256)
 
-![](https://misaka.imfast.io/64x128.svg)
 
-```<img src="https://[YOUR_DOMAIN]/512x128+cross" />```
+2. 图片加边框
 
-![](https://misaka.imfast.io/512x128+cross.svg)
+```html
+<img src="https://z.wiki/placeholder/512x256+border" />
+```
 
-```<img src="https://[YOUR_DOMAIN]/512x128+border" />```
+![](https://z.wiki/placeholder/512x256+border)
 
-![](https://misaka.imfast.io/512x128+border.svg)
 
-```<img src="https://[YOUR_DOMAIN]/512x128+cross+border" />```
+3. 图片加叉号
 
-![](https://misaka.imfast.io/512x128+cross+border.svg)
+```html
+<img src="https://z.wiki/placeholder/512x256+cross" />
+```
+
+![](https://z.wiki/placeholder/512x256+cross)
+
+4. 图片加叉号加边框
+
+```html
+<img src="https://z.wiki/placeholder/512x256+border+cross" />
+```
+
+![](https://z.wiki/placeholder/512x256+border+cross)
 

@@ -9,13 +9,17 @@ var parseurl = require('parseurl')
 var logger = require('morgan')
 var express = require('express')
 var app = express()
+var showdown  = require('showdown')
 
 app.use(logger())
 
 app.get('/placeholder', function(req, res) {
-  const text = fs.readFileSync(path.join(__dirname, './README.md'));
+  const converter = new showdown.Converter();
+  const markdown = String(fs.readFileSync(path.join(__dirname, './README.md')));
+  console.log('markdown is', markdown);
   res.writeHead(200, {'Content-Type': 'text/html'});
-  res.end(text);
+  console.log('html is', converter.makeHtml(markdown));
+  res.end(converter.makeHtml(markdown));
 })
 
 app.get('/*', function(req, res) {
