@@ -16,14 +16,11 @@ app.use(logger())
 app.get('/placeholder', function(req, res) {
   const converter = new showdown.Converter();
   const markdown = String(fs.readFileSync(path.join(__dirname, './README.md')));
-  console.log('markdown is', markdown);
   res.writeHead(200, {'Content-Type': 'text/html'});
-  console.log('html is', converter.makeHtml(markdown));
   res.end(converter.makeHtml(markdown));
 })
 
 app.get('/*', function(req, res) {
-  console.log('pathname is ', parseurl(req).pathname);
   let args = parseurl(req).pathname.replace('/placeholder/', '').split('+')
   let size = args[0].split('x')
   let width = size[0]
