@@ -16,7 +16,7 @@ app.use(logger())
 app.get('/placeholder', function(req, res) {
   const converter = new showdown.Converter();
   const markdown = String(fs.readFileSync(path.join(__dirname, './README.md')));
-  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.writeHead(200, {'Content-Type': 'text/html;charset=utf8'});
   res.end(converter.makeHtml(markdown));
 })
 
