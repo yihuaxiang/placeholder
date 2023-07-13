@@ -56,7 +56,7 @@ app.get('/*', function(req, res) {
   const pinyinColor = req.query.pinyinColor || 'rgb(193 120 90)';
   if (showPinyin) {
       pinyinContent = `
-      <text text-anchor="middle" x="${width/2}" y="${height/2 - 20}" style="fill:${pinyinColor};font-weight:bold;font-size:${font_size / 2}px;font-family:Arial,Helvetica,sans-serif;dominant-baseline:central">
+      <text text-anchor="middle" x="${width/2}" y="${height/2 - 24}" style="fill:${pinyinColor};font-weight:bold;font-size:${font_size / 2}px;font-family:Arial,Helvetica,sans-serif;dominant-baseline:central">
       ${pinyin(text)}
       </text>
     `;
