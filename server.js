@@ -1,6 +1,5 @@
 var port = Number(process.env.PORT || 8084)
 
-
 var global_count = 0
 
 var fs = require('fs')
@@ -10,6 +9,7 @@ var logger = require('morgan')
 var express = require('express')
 var app = express()
 var showdown  = require('showdown')
+const { pinyin } = require('pinyin-pro');
 
 app.use(logger())
 
@@ -21,8 +21,9 @@ app.get('/placeholder', function(req, res) {
 })
 
 app.get('/*', function(req, res) {
+  console.table(req.query);
   let args = parseurl(req).pathname.replace('/placeholder/', '').split('+')
-  const text = req.query.text;
+  let text = req.query.text;
 
   const textColor = req.query.color || '#aaa';
   const bgColor = req.query.bgColor || '#eee';
@@ -48,11 +49,25 @@ app.get('/*', function(req, res) {
       `
     }
   }
+
+  const showPinyin = req.query.pinyin;
+  console.log('showPinyin', showPinyin)
+  let pinyinContent = '';
+  const pinyinColor = req.query.pinyinColor || 'rgb(193 120 90)';
+  if (showPinyin) {
+      pinyinContent = `
+      <text text-anchor="middle" x="${width/2}" y="${height/2 - 20}" style="fill:${pinyinColor};font-weight:bold;font-size:${font_size / 2}px;font-family:Arial,Helvetica,sans-serif;dominant-baseline:central">
+      ${pinyin(text)}
+      </text>
+    `;
+  }
+
   res.writeHead(200, {'Content-Type': 'image/svg+xml'})
   res.end(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
     <rect width="${width}" height="${height}" style="${rectStyle}" fill="${bgColor}"/>
     ${elements}
-    <text text-anchor="middle" x="${width/2}" y="${height/2}" style="fill:${textColor};font-weight:bold;font-size:${font_size}px;font-family:Arial,Helvetica,sans-serif;dominant-baseline:central">
+    ${pinyinContent}
+    <text text-anchor="middle" x="${width/2}" y="${height/2 + (showPinyin ? 10 : 0)}" style="fill:${textColor};font-weight:bold;font-size:${font_size}px;font-family:serif,Georgia,Baskerville,Arial,Helvetica,sans-serif;dominant-baseline:central">
     ${content}
     </text>
   </svg>`)
